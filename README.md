@@ -1,6 +1,6 @@
 # 💫 About Me:
 👤 I'm cikeZ00 <br>
-🔭 I’m currently working on: University<br>🌱 I’m currently learning: Rustlang, go
+🔭 I’m currently working on: University<br>🌱 I’m currently learning: Rustlang, go, C
 
 
 ## 🌐 Socials:
