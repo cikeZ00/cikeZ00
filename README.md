@@ -26,4 +26,4 @@ I love working with a wide range of tools and technologies:
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/cikez00)
 
-![:cikeZ00](https://count.getloli.com/@:cikeZ00)
+![cikeZ00](https://mayu.due.moe/get/@cikeZ00?theme=gelbooru&padding=6)
