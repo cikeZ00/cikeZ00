@@ -24,6 +24,12 @@ I love working with a wide range of tools and technologies:
 - **Discord:** [c1kez](https://discordapp.com/users/350765965278969860)
 - **Twitch:** [@cikeZ00](https://twitch.tv/cikeZ00)
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/cikez00)
+<p align="center">
+  <a href="https://buymeacoffee.com/cikez00">
+    <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee">
+  </a>
+</p>
 
-![cikeZ00](https://count.getloli.com/@cikeZ00?name=cikeZ00&theme=booru-qualityhentais&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto)
+<p align="center">
+  <img src="https://count.getloli.com/@cikeZ00?name=cikeZ00&theme=booru-qualityhentais&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt="cikeZ00">
+</p>
