@@ -1,9 +1,4 @@
-# 🪐 Hello, I'm cikeZ00!
-
-Welcome to my GitHub! I’m a tech enthusiast and student currently diving into various programming languages and frameworks. I’m passionate about building useful, efficient software and learning new technologies along the way.
-
- **Currently Working On:** University projects, expanding my skills in Rust, Go, and C.  
- **Learning:** Rust, Go, C, software architecture, and system design.
+# Hello!
 
 ## Tech Stack:
 <div align="center">
