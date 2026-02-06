@@ -9,12 +9,6 @@
   <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="Postgres"/>
 </div> 
 
-## GitHub Stats & Activity
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=cikeZ00&theme=dark&hide_border=true&include_all_commits=true&count_private=true" width="400"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=cikeZ00&theme=dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact" width="315"/>
-</p>
-
 ## Socials
 - **Discord:** [c1kez](https://discordapp.com/users/350765965278969860)
 
