@@ -1,0 +1,37 @@
+name: Build animated profile
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 0 * * *"
+  push:
+    paths:
+      - "scripts/generate_visuals.py"
+      - ".github/workflows/profile-visuals.yml"
+      - "README.md"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-visuals
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+
+      - name: Generate animated SVG scenes
+        run: python3 scripts/generate_visuals.py --output dist
+
+      - name: Publish animations to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
