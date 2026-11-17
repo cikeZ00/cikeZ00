@@ -525,6 +525,67 @@ def terminal_footer(stats: dict, width: int = 1200) -> str:
     return svg("".join(body), width, h, "Terminal shutdown footer")
 
 
+# --------------------------------------------------------------- status header
+
+# abrupt on/off, never eased: a glitch has to cut, not fade
+FLICKER_A = ('values="0;0;1;0;0;1;0" keyTimes="0;.7;.72;.76;.86;.88;1"', 6)
+FLICKER_B = ('values="0;1;0;0;1;0" keyTimes="0;.28;.32;.74;.78;1"', 7.5)
+FLICKER_C = ('values="0;0;1;0;0" keyTimes="0;.52;.54;.58;1"', 9)
+
+CORRUPT = {"O": "0", "E": "3", "I": "1", "S": "5", "A": "4", "T": "7", "B": "8"}
+
+
+def corrupt(text: str) -> str:
+    return "".join(CORRUPT.get(ch, ch) if index % 3 == 0 else ch for index, ch in enumerate(text))
+
+
+def status_header(width: int = 720) -> str:
+    """Two lines of terminal text with a torn-slice glitch, no typing."""
+    h = 58
+    cx = width // 2
+    rows = (
+        ("SYSTEM ONLINE // WELCOME, OPERATOR", 22, 14, PAPER),
+        (f"DESIGNATION: {LOGIN} // SYSTEMS DEVELOPER", 46, 13, MUTED),
+    )
+    body = []
+    for row, (text, y, size, colour) in enumerate(rows):
+        anchor = f'text-anchor="middle" font-size="{size}" letter-spacing="1.5"'
+        # the base line jumps sideways for two frames
+        body.append(
+            f'<text x="{cx}" y="{y}" {anchor} fill="{colour}">{esc(text)}'
+            '<animateTransform attributeName="transform" type="translate" '
+            f'values="0 0;0 0;2.5 0;0 0;0 0" keyTimes="0;{0.6 + row * .05:.2f};'
+            f'{0.62 + row * .05:.2f};{0.66 + row * .05:.2f};1" '
+            'dur="6.5s" repeatCount="indefinite"/></text>'
+        )
+        # slices of the same line, shifted and clipped to a six-pixel band
+        for index, (offset, dx, ghost, spark) in enumerate(
+            (
+                (-12, 3.5, GOLD, FLICKER_A if row == 0 else FLICKER_B),
+                (-6, -3.5, "#a1523f", FLICKER_B if row == 0 else FLICKER_A),
+            )
+        ):
+            band = f"t{row}{index}"
+            values, dur = spark
+            body.append(
+                f'<clipPath id="{band}"><rect x="0" y="{y + offset}" width="{width}" '
+                'height="6"/></clipPath>'
+                f'<g clip-path="url(#{band})">'
+                f'<text x="{cx + dx}" y="{y}" {anchor} fill="{ghost}" opacity="0">{esc(text)}'
+                f'<animate attributeName="opacity" {values} dur="{dur}s" repeatCount="indefinite"/>'
+                "</text></g>"
+            )
+        values, dur = FLICKER_C
+        body.append(
+            f'<text x="{cx + 2.4}" y="{y}" {anchor} fill="{colour}" opacity="0">'
+            f"{esc(corrupt(text))}"
+            f'<animate attributeName="opacity" {values} dur="{dur + row * 1.5}s" '
+            'repeatCount="indefinite"/>'
+            "</text>"
+        )
+    return svg("".join(body), width, h, f"{LOGIN} status line")
+
+
 # ------------------------------------------------------------- access counter
 
 
@@ -563,6 +624,7 @@ def main() -> None:
 
     visuals = {
         "terminal-header.svg": terminal_header(art["hero"], stats),
+        "status-glitch.svg": status_header(),
         "sep-systems.svg": separator("01", "SYSTEMS"),
         "sep-archive.svg": separator("02", "ARCHIVE"),
         "sep-comms.svg": separator("03", "COMMS"),

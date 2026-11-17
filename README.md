@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/terminal-header.svg" width="100%" alt="YoRHa terminal feed" />
   <br/>
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=16&duration=2800&pause=900&color=C9C6B8&center=true&vCenter=true&width=640&height=32&lines=SYSTEM+ONLINE+%2F%2F+WELCOME%2C+OPERATOR;Rust+%E2%80%A2+C+%E2%80%A2+C%2B%2B+%E2%80%A2+Python" alt="Terminal messages" />
+  <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/status-glitch.svg" width="720" alt="SYSTEM ONLINE // WELCOME, OPERATOR" />
 </div>
 
 <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/sep-systems.svg" width="100%" alt="01 // Systems" />
