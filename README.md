@@ -27,8 +27,14 @@
   <a href="https://buymeacoffee.com/cikez00"><img src="https://img.shields.io/badge/BUY_ME_A_COFFEE-SUPPORT-171717?style=for-the-badge&logo=buymeacoffee&logoColor=E8D8B0" alt="Buy me a coffee" /></a>
   <br/><br/>
   <img src="https://komarev.com/ghpvc/?username=cikeZ00&style=flat-square&color=77736B&label=ARCHIVE+ACCESS+COUNT" alt="Profile views" />
-  <br/><br/>
-  <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/access-counter.svg" width="560" alt="Archive access counter" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/counter-top.svg" width="504" alt="" />
+  <br/>
+  <img src="https://count.getloli.com/@cikeZ00?name=cikeZ00&theme=booru-qualityhentais" alt="Archive access counter" />
+  <br/>
+  <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/counter-bottom.svg" width="504" alt="" />
 </p>
 
 <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/terminal-footer.svg" width="100%" alt="End of transmission" />
