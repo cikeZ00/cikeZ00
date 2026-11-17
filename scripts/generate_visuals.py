@@ -527,61 +527,72 @@ def terminal_footer(stats: dict, width: int = 1200) -> str:
 
 # --------------------------------------------------------------- status header
 
-# abrupt on/off, never eased: a glitch has to cut, not fade
-FLICKER_A = ('values="0;0;1;0;0;1;0" keyTimes="0;.7;.72;.76;.86;.88;1"', 6)
-FLICKER_B = ('values="0;1;0;0;1;0" keyTimes="0;.28;.32;.74;.78;1"', 7.5)
-FLICKER_C = ('values="0;0;1;0;0" keyTimes="0;.52;.54;.58;1"', 9)
-
 CORRUPT = {"O": "0", "E": "3", "I": "1", "S": "5", "A": "4", "T": "7", "B": "8"}
+
+# one sentence at a time; the loop closes on itself, so there is no seam
+STATUS = (
+    # text, colour, opacity values, opacity keyTimes, slide values, keyTimes, glitch
+    ("SYSTEM ONLINE // WELCOME, OPERATOR", PAPER,
+     "1;1;0;0;0;1", "0;.42;.46;.88;.95;1",
+     "0 0;0 0;0 -7;0 -7;0 7;0 0", "0;.42;.46;.93;.95;1",
+     (0.16, 0.31, 0.37)),
+    (f"DESIGNATION: {LOGIN} // SYSTEMS DEVELOPER", MUTED,
+     "0;0;1;1;0;0", "0;.48;.52;.88;.92;1",
+     "0 7;0 7;0 0;0 0;0 -7;0 -7", "0;.48;.52;.88;.92;1",
+     (0.62, 0.79, 0.86)),
+)
 
 
 def corrupt(text: str) -> str:
     return "".join(CORRUPT.get(ch, ch) if index % 3 == 0 else ch for index, ch in enumerate(text))
 
 
-def status_header(width: int = 720) -> str:
-    """Two lines of terminal text with a torn-slice glitch, no typing."""
-    h = 58
-    cx = width // 2
-    rows = (
-        ("SYSTEM ONLINE // WELCOME, OPERATOR", 22, 14, PAPER),
-        (f"DESIGNATION: {LOGIN} // SYSTEMS DEVELOPER", 46, 13, MUTED),
+def flicker(start: float, dur: float = 8.0) -> str:
+    """One frame on, two off: a cut, never a fade."""
+    times = f"0;{start:.3f};{start + .012:.3f};{start + .035:.3f};1"
+    return (
+        f'values="0;0;1;0;0" keyTimes="{times}" dur="{dur}s" repeatCount="indefinite"'
     )
+
+
+def status_header(width: int = 640) -> str:
+    """Alternating status sentences: vertical swap, torn slices, no typing."""
+    h, y, dur = 46, 28, 8.0
+    cx = width // 2
     body = []
-    for row, (text, y, size, colour) in enumerate(rows):
-        anchor = f'text-anchor="middle" font-size="{size}" letter-spacing="1.5"'
-        # the base line jumps sideways for two frames
-        body.append(
-            f'<text x="{cx}" y="{y}" {anchor} fill="{colour}">{esc(text)}'
-            '<animateTransform attributeName="transform" type="translate" '
-            f'values="0 0;0 0;2.5 0;0 0;0 0" keyTimes="0;{0.6 + row * .05:.2f};'
-            f'{0.62 + row * .05:.2f};{0.66 + row * .05:.2f};1" '
-            'dur="6.5s" repeatCount="indefinite"/></text>'
-        )
-        # slices of the same line, shifted and clipped to a six-pixel band
-        for index, (offset, dx, ghost, spark) in enumerate(
+    for index, (text, colour, op_v, op_t, ty_v, ty_t, glitches) in enumerate(STATUS):
+        anchor = f'text-anchor="middle" font-size="14" letter-spacing="1.5"'
+        layers = [f'<text x="{cx}" y="{y}" {anchor} fill="{colour}">{esc(text)}</text>']
+        for band, (offset, dx, ghost, at) in enumerate(
             (
-                (-12, 3.5, GOLD, FLICKER_A if row == 0 else FLICKER_B),
-                (-6, -3.5, "#a1523f", FLICKER_B if row == 0 else FLICKER_A),
+                (-12, 3.5, GOLD, glitches[0]),
+                (-6, -3.5, "#a1523f", glitches[1]),
             )
         ):
-            band = f"t{row}{index}"
-            values, dur = spark
-            body.append(
-                f'<clipPath id="{band}"><rect x="0" y="{y + offset}" width="{width}" '
+            clip = f"s{index}{band}"
+            layers.append(
+                f'<clipPath id="{clip}"><rect x="0" y="{y + offset}" width="{width}" '
                 'height="6"/></clipPath>'
-                f'<g clip-path="url(#{band})">'
-                f'<text x="{cx + dx}" y="{y}" {anchor} fill="{ghost}" opacity="0">{esc(text)}'
-                f'<animate attributeName="opacity" {values} dur="{dur}s" repeatCount="indefinite"/>'
-                "</text></g>"
+                f'<g clip-path="url(#{clip})">'
+                f'<text x="{cx + dx}" y="{y}" {anchor} fill="{ghost}" opacity="0">'
+                f"{esc(text)}"
+                f'<animate attributeName="opacity" {flicker(at, dur)}/></text></g>'
             )
-        values, dur = FLICKER_C
-        body.append(
+        layers.append(
             f'<text x="{cx + 2.4}" y="{y}" {anchor} fill="{colour}" opacity="0">'
             f"{esc(corrupt(text))}"
-            f'<animate attributeName="opacity" {values} dur="{dur + row * 1.5}s" '
-            'repeatCount="indefinite"/>'
-            "</text>"
+            f'<animate attributeName="opacity" {flicker(glitches[2], dur)}/></text>'
+        )
+        body.append(
+            # base opacity keeps the fallback sane: without SMIL only the first
+            # sentence shows instead of both on top of each other
+            f'<g opacity="{1 if index == 0 else 0}">'
+            f'<animate attributeName="opacity" values="{op_v}" keyTimes="{op_t}" '
+            f'dur="{dur}s" repeatCount="indefinite"/>'
+            f'<animateTransform attributeName="transform" type="translate" values="{ty_v}" '
+            f'keyTimes="{ty_t}" dur="{dur}s" repeatCount="indefinite"/>'
+            + "".join(layers)
+            + "</g>"
         )
     return svg("".join(body), width, h, f"{LOGIN} status line")
 

@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/terminal-header.svg" width="100%" alt="YoRHa terminal feed" />
   <br/>
-  <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/status-glitch.svg" width="720" alt="SYSTEM ONLINE // WELCOME, OPERATOR" />
+  <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/status-glitch.svg" width="640" alt="SYSTEM ONLINE // WELCOME, OPERATOR — DESIGNATION: cikeZ00 // SYSTEMS DEVELOPER" />
 </div>
 
 <img src="https://raw.githubusercontent.com/cikeZ00/cikeZ00/output/sep-systems.svg" width="100%" alt="01 // Systems" />
