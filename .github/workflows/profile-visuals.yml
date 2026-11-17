@@ -20,13 +20,16 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Check out profile repository
         uses: actions/checkout@v4
 
-      - name: Generate animated SVG scenes
+      - name: Generate animated SVG scenes with live commit stats
         run: python3 scripts/generate_visuals.py --output dist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_LOGIN: ${{ github.repository_owner }}
 
       - name: Publish animations to output branch
         uses: crazy-max/ghaction-github-pages@v4
