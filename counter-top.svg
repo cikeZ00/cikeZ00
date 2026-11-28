@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="504" height="36" viewBox="0 0 504 36" role="img" aria-label="Access counter top rail"><title>Access counter top rail</title><style>
+:root{--bg:transparent;--paper:#2c2b26;--muted:#6c675c;--gold:#8a7c5e;--dim:#cfc9ba;
+--ink:rgba(20,20,18,.06);--grid:rgba(30,28,24,.12)}
+.g-top{stop-color:#cbbd9f}.g-bot{stop-color:#877b63}
+.b-top{stop-color:#b6a98b}.b-bot{stop-color:#6b6353}
+@media (prefers-color-scheme:dark){:root{--paper:#d8d3c4;--muted:#827f76;--gold:#c9bea4;
+--dim:#3a3730;--ink:#171717;--grid:rgba(185,176,156,.08)}
+.g-top{stop-color:#f0e9d8}.g-bot{stop-color:#9c9077}
+.b-top{stop-color:#c9bea4}.b-bot{stop-color:#6d6758}}
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+</style><defs><linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop class="g-top"/><stop offset="1" class="g-bot"/></linearGradient><linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop class="b-top"/><stop offset="1" class="b-bot"/></linearGradient><filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#b9b09c" stroke-opacity=".07"/></pattern><pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".22"/></pattern></defs><path d="M0 35H504" style="stroke:var(--gold)" stroke-opacity=".4"/><rect x="0" y="34" width="80" height="2" fill="url(#gold)"><animate attributeName="x" values="-80;504" dur="7s" repeatCount="indefinite"/></rect><path d="M12 14.0L16 18.0L12 22.0L8 18.0Z" style="fill:var(--gold)"><animate attributeName="opacity" values="1;.18;1" dur="2.4s" repeatCount="indefinite"/></path><text x="24" y="22.0" font-size="10" style="fill:var(--paper)" letter-spacing="2">ACCESS LOG</text><text x="490" y="22.0" text-anchor="end" font-size="9" style="fill:var(--gold)" letter-spacing="2">LIVE // COUNTER NODE 01</text></svg>
